@@ -35,12 +35,21 @@ namespace CoinChange
         public void MultipleCoinsOneComplexSolution() =>
             Assert.Equal(1, Change(5, new[] { 2, 3 }));
 
+        [Fact]
+        public void MultipleCoinsMultipleComplexSolutions() =>
+            Assert.Equal(5, Change(5, new[] { 1, 2, 3 }));
+
+        [Fact]
+        public void HackerRankSample() =>
+            Assert.Equal(5, Change(10, new[] { 2, 5, 3, 6 }));
+
         public static int Change(int n, IEnumerable<int> coins)
         {
             int[] m = new int[n + 1];
             foreach (int coin in coins)
-                for (int j = coin; j <= n; j += coin)
-                    m[j] += 1;
+                for (int j = 0; j < n; j++)
+                    if ((j == 0 || m[j] != 0) && j + coin <= n)
+                        m[j + coin] += Math.Max(m[j], 1);
             return m[n];
         }
     }
