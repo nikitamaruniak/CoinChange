@@ -9,41 +9,41 @@ namespace CoinChange
     {
         [Fact]
         public void NoCoinsNoSolution() =>
-            Assert.Equal(0, Change(1, Enumerable.Empty<int>()));
+            Assert.Equal(0, WaysToMakeChange(1, Enumerable.Empty<int>()));
 
         [Fact]
         public void OneCoinOneSimpleSolution() =>
-            Assert.Equal(1, Change(3, new[] { 3 }));
+            Assert.Equal(1, WaysToMakeChange(3, new[] { 3 }));
 
         [Fact]
         public void OneCoinOneComplexSolution() =>
-            Assert.Equal(1, Change(9, new[] { 3 }));
+            Assert.Equal(1, WaysToMakeChange(9, new[] { 3 }));
 
         [Fact]
         public void OneCoinNoSolution() =>
-            Assert.Equal(0, Change(3, new[] { 2 }));
+            Assert.Equal(0, WaysToMakeChange(3, new[] { 2 }));
 
         [Fact]
         public void MultipleCoinsNoSolution() =>
-            Assert.Equal(0, Change(1, new[] { 2, 3 }));
+            Assert.Equal(0, WaysToMakeChange(1, new[] { 2, 3 }));
 
         [Fact]
         public void MultipleCoinsMultipleSimpleSolution() =>
-            Assert.Equal(2, Change(6, new[] { 2, 3 }));
+            Assert.Equal(2, WaysToMakeChange(6, new[] { 2, 3 }));
 
         [Fact]
         public void MultipleCoinsOneComplexSolution() =>
-            Assert.Equal(1, Change(5, new[] { 2, 3 }));
+            Assert.Equal(1, WaysToMakeChange(5, new[] { 2, 3 }));
 
         [Fact]
         public void MultipleCoinsMultipleComplexSolutions() =>
-            Assert.Equal(5, Change(5, new[] { 1, 2, 3 }));
+            Assert.Equal(5, WaysToMakeChange(5, new[] { 1, 2, 3 }));
 
         [Fact]
         public void HackerRankSample() =>
-            Assert.Equal(5, Change(10, new[] { 2, 5, 3, 6 }));
+            Assert.Equal(5, WaysToMakeChange(10, new[] { 2, 5, 3, 6 }));
 
-        public static int Change(int n, IEnumerable<int> coins)
+        public static int WaysToMakeChange(int n, IEnumerable<int> coins)
         {
             int[] m = new int[n + 1];
             foreach (int coin in coins)
