@@ -5,7 +5,7 @@ using Xunit;
 
 namespace CoinChange
 {
-    public class CoinChange
+    public class ChangeMachineTests
     {
         [Fact]
         public void OneSolutionForZeroSum() =>
@@ -49,12 +49,7 @@ namespace CoinChange
 
         public static int WaysToMakeChange(int sum, IEnumerable<int> coins)
         {
-            int[] waysBySum = new int[sum + 1];
-            waysBySum[0] = 1;
-            foreach (int coin in coins)
-                for (int baseSum = 0; baseSum <= sum - coin; baseSum++)
-                    waysBySum[baseSum + coin] += waysBySum[baseSum];
-            return waysBySum[sum];
+            return new ChangeMachine(coins).WaysToMakeChange(sum);
         }
     }
 }
