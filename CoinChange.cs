@@ -8,6 +8,10 @@ namespace CoinChange
     public class CoinChange
     {
         [Fact]
+        public void OneSolutionForZeroSum() =>
+            Assert.Equal(1, WaysToMakeChange(0, Enumerable.Empty<int>()));
+
+        [Fact]
         public void NoCoinsNoSolution() =>
             Assert.Equal(0, WaysToMakeChange(1, Enumerable.Empty<int>()));
 
@@ -46,10 +50,10 @@ namespace CoinChange
         public static int WaysToMakeChange(int n, IEnumerable<int> coins)
         {
             int[] m = new int[n + 1];
+            m[0] = 1;
             foreach (int coin in coins)
-                for (int j = 0; j < n; j++)
-                    if ((j == 0 || m[j] != 0) && j + coin <= n)
-                        m[j + coin] += Math.Max(m[j], 1);
+                for (int j = 0; j <= n - coin; j++)
+                    m[j + coin] += m[j];
             return m[n];
         }
     }
