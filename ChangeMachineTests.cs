@@ -39,13 +39,16 @@ namespace CoinChange
         public void MultipleCoinsOneComplexSolution() =>
             Assert.Equal(1, WaysToMakeChange(5, new[] { 2, 3 }));
 
-        [Fact]
-        public void MultipleCoinsMultipleComplexSolutions() =>
-            Assert.Equal(5, WaysToMakeChange(5, new[] { 1, 2, 3 }));
-
-        [Fact]
-        public void HackerRankSample() =>
-            Assert.Equal(5, WaysToMakeChange(10, new[] { 2, 5, 3, 6 }));
+        [Theory]
+        [InlineData(5, 5, new int[] {1, 2, 3})]
+        [InlineData(5, 10, new int[] {2, 5, 3, 6})]
+        public void MultipleCoinsMultipleComplexSolutions(
+            int expected,
+            int sum,
+            IEnumerable<int> coins)
+        {
+            Assert.Equal(expected, WaysToMakeChange(sum, coins));
+        }
 
         public static int WaysToMakeChange(int sum, IEnumerable<int> coins) =>
             new ChangeMachine(coins).WaysToMakeChange(sum);
