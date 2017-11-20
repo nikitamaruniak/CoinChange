@@ -47,9 +47,7 @@ namespace CoinChange
         public void HackerRankSample() =>
             Assert.Equal(5, WaysToMakeChange(10, new[] { 2, 5, 3, 6 }));
 
-        public static int WaysToMakeChange(int sum, IEnumerable<int> coins)
-        {
-            return new ChangeMachine(coins).WaysToMakeChange(sum);
-        }
+        public static int WaysToMakeChange(int sum, IEnumerable<int> coins) =>
+            new ChangeMachine(coins).WaysToMakeChange(sum);
     }
 }
